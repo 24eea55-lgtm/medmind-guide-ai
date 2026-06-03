@@ -1,0 +1,8 @@
+# MediSense
+
+> AI-powered medical report analysis, medicine guidance, health trend monitoring, and a doubt-clearing AI assistant.
+
+## Pages
+
+- [Home](/): Overview of MediSense features.
+- [Sign in](/auth): Create an account or sign in.
