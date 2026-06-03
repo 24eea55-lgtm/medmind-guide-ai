@@ -14,13 +14,208 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      knowledge_docs: {
+        Row: {
+          content: string
+          created_at: string
+          embedding: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      medicines: {
+        Row: {
+          created_at: string
+          dosage: string | null
+          frequency: string | null
+          guidance: string | null
+          id: string
+          name: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dosage?: string | null
+          frequency?: string | null
+          guidance?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dosage?: string | null
+          frequency?: string | null
+          guidance?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      report_metrics: {
+        Row: {
+          created_at: string
+          flag: string | null
+          id: string
+          name: string
+          ref_high: number | null
+          ref_low: number | null
+          report_id: string
+          text_value: string | null
+          unit: string | null
+          user_id: string
+          value: number | null
+        }
+        Insert: {
+          created_at?: string
+          flag?: string | null
+          id?: string
+          name: string
+          ref_high?: number | null
+          ref_low?: number | null
+          report_id: string
+          text_value?: string | null
+          unit?: string | null
+          user_id: string
+          value?: number | null
+        }
+        Update: {
+          created_at?: string
+          flag?: string | null
+          id?: string
+          name?: string
+          ref_high?: number | null
+          ref_low?: number | null
+          report_id?: string
+          text_value?: string | null
+          unit?: string | null
+          user_id?: string
+          value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_metrics_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          created_at: string
+          file_path: string | null
+          id: string
+          raw_text: string | null
+          report_date: string | null
+          status: string
+          summary: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          file_path?: string | null
+          id?: string
+          raw_text?: string | null
+          report_date?: string | null
+          status?: string
+          summary?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          file_path?: string | null
+          id?: string
+          raw_text?: string | null
+          report_date?: string | null
+          status?: string
+          summary?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      match_knowledge_docs: {
+        Args: { match_count?: number; query_embedding: string }
+        Returns: {
+          content: string
+          id: string
+          similarity: number
+          title: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
