@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /upload
+Disallow: /trends
+Disallow: /medicines
+Disallow: /chat
+Disallow: /knowledge

@@ -9,38 +9,169 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedUploadRouteImport } from './routes/_authenticated/upload'
+import { Route as AuthenticatedTrendsRouteImport } from './routes/_authenticated/trends'
+import { Route as AuthenticatedMedicinesRouteImport } from './routes/_authenticated/medicines'
+import { Route as AuthenticatedKnowledgeRouteImport } from './routes/_authenticated/knowledge'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedUploadRoute = AuthenticatedUploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTrendsRoute = AuthenticatedTrendsRouteImport.update({
+  id: '/trends',
+  path: '/trends',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMedicinesRoute = AuthenticatedMedicinesRouteImport.update({
+  id: '/medicines',
+  path: '/medicines',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedKnowledgeRoute = AuthenticatedKnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/chat': typeof AuthenticatedChatRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/knowledge': typeof AuthenticatedKnowledgeRoute
+  '/medicines': typeof AuthenticatedMedicinesRoute
+  '/trends': typeof AuthenticatedTrendsRoute
+  '/upload': typeof AuthenticatedUploadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/chat': typeof AuthenticatedChatRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/knowledge': typeof AuthenticatedKnowledgeRoute
+  '/medicines': typeof AuthenticatedMedicinesRoute
+  '/trends': typeof AuthenticatedTrendsRoute
+  '/upload': typeof AuthenticatedUploadRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/chat': typeof AuthenticatedChatRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/knowledge': typeof AuthenticatedKnowledgeRoute
+  '/_authenticated/medicines': typeof AuthenticatedMedicinesRoute
+  '/_authenticated/trends': typeof AuthenticatedTrendsRoute
+  '/_authenticated/upload': typeof AuthenticatedUploadRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/chat'
+    | '/dashboard'
+    | '/knowledge'
+    | '/medicines'
+    | '/trends'
+    | '/upload'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/chat'
+    | '/dashboard'
+    | '/knowledge'
+    | '/medicines'
+    | '/trends'
+    | '/upload'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/_authenticated/chat'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/knowledge'
+    | '/_authenticated/medicines'
+    | '/_authenticated/trends'
+    | '/_authenticated/upload'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +179,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/upload': {
+      id: '/_authenticated/upload'
+      path: '/upload'
+      fullPath: '/upload'
+      preLoaderRoute: typeof AuthenticatedUploadRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trends': {
+      id: '/_authenticated/trends'
+      path: '/trends'
+      fullPath: '/trends'
+      preLoaderRoute: typeof AuthenticatedTrendsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/medicines': {
+      id: '/_authenticated/medicines'
+      path: '/medicines'
+      fullPath: '/medicines'
+      preLoaderRoute: typeof AuthenticatedMedicinesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/knowledge': {
+      id: '/_authenticated/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof AuthenticatedKnowledgeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chat': {
+      id: '/_authenticated/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof AuthenticatedChatRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedChatRoute: typeof AuthenticatedChatRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedKnowledgeRoute: typeof AuthenticatedKnowledgeRoute
+  AuthenticatedMedicinesRoute: typeof AuthenticatedMedicinesRoute
+  AuthenticatedTrendsRoute: typeof AuthenticatedTrendsRoute
+  AuthenticatedUploadRoute: typeof AuthenticatedUploadRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedChatRoute: AuthenticatedChatRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedKnowledgeRoute: AuthenticatedKnowledgeRoute,
+  AuthenticatedMedicinesRoute: AuthenticatedMedicinesRoute,
+  AuthenticatedTrendsRoute: AuthenticatedTrendsRoute,
+  AuthenticatedUploadRoute: AuthenticatedUploadRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
