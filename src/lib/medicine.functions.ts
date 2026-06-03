@@ -177,7 +177,7 @@ export const ingestKnowledge = createServerFn({ method: "POST" })
         rows.push({
           title: chunks.length > 1 ? `${data.title} (part ${i + 1})` : data.title,
           content: chunks[i],
-          embedding,
+          embedding: JSON.stringify(embedding),
         });
       }
       const { error } = await supabaseAdmin.from("knowledge_docs").insert(rows);
