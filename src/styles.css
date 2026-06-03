@@ -146,6 +146,8 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap");
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -154,5 +156,20 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 }
+
+.prose-chat :is(h1,h2,h3) { font-family: var(--font-display); margin: 0.5em 0 0.3em; font-weight: 600; }
+.prose-chat p { margin: 0.4em 0; }
+.prose-chat ul { margin: 0.4em 0; padding-left: 1.2em; list-style: disc; }
+.prose-chat ol { margin: 0.4em 0; padding-left: 1.2em; list-style: decimal; }
+.prose-chat strong { font-weight: 600; }
+.prose-chat code { background: var(--muted); padding: 0 0.3em; border-radius: 4px; font-size: 0.9em; }
+
