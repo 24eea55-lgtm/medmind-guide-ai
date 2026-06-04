@@ -194,7 +194,7 @@ export const compareReports = createServerFn({ method: "POST" })
             content: `Latest report: ${latest.title} (${latest.report_date ?? latest.created_at}). Previous report: ${previous.title} (${previous.report_date ?? previous.created_at}). Metrics JSON (latest report_id=${latest.id}, previous report_id=${previous.id}): ${JSON.stringify(metrics)}`,
           },
         ],
-        { model: "google/gemini-3-flash-preview" },
+        { model: "google/gemini-2.5-flash" },
       );
 
       const comparison = completion.choices?.[0]?.message?.content ?? "";
