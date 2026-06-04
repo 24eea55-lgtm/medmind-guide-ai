@@ -58,7 +58,7 @@ export const getMedicineGuidance = createServerFn({ method: "POST" })
             content: `Reference documents:\n${contextText}\n\nMedicine: ${med.name}${med.dosage ? `, dosage ${med.dosage}` : ""}${med.frequency ? `, frequency ${med.frequency}` : ""}. Provide guidance for the patient.`,
           },
         ],
-        { model: "google/gemini-3-flash-preview" },
+        { model: "google/gemini-2.5-flash" },
       );
 
       const guidance = completion.choices?.[0]?.message?.content ?? "";
@@ -131,7 +131,7 @@ Recent report summaries: ${JSON.stringify(recentReports ?? [])}`,
           },
           ...ordered.map((m: any) => ({ role: m.role, content: m.content })),
         ],
-        { model: "google/gemini-3-flash-preview" },
+        { model: "google/gemini-2.5-flash" },
       );
 
       const reply =
